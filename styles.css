@@ -272,7 +272,8 @@ section {
 /* Texte : left column */
 .presentation-text {
   /* occupies remaining space on the left */
-  overflow: visible;
+  padding: 7%;
+  
 }
 
 /* Photo du diplôme (droite) */
