@@ -1071,7 +1071,6 @@ width: 100%;
 display: block;
 height: auto;
 max-height: 360px;
-object-fit: cover;
 border-radius: 10px;
 box-shadow: 0 8px 28px rgba(0,0,0,0.12);
 margin-bottom: 12px;
