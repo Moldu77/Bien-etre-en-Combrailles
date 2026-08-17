@@ -27,7 +27,9 @@
           <h1>Contact & Devis</h1>
           <p class="subtitle-form-h1">Réponse sous 48h</p>
 
-          <form id="contactForm" novalidate>
+          <form id="contactForm" novalidate action="https://formspree.io/f/xaewpaww"
+            method="POST">
+            
             <div class="form-group">
               <label for="prenom">Prénom *</label>
               <input type="text" id="prenom" name="prenom" required placeholder="Entrez votre prénom" />
@@ -89,41 +91,27 @@
         </div>
       </div>
     </footer>
+<script>
+   form.addEventListener('submit', async function(e){
+  e.preventDefault();
 
-    <script>
-    (function(){
-      // Menu toggle
-      const btn = document.getElementById('nav-toggle');
-      const nav = document.getElementById('navbar');
-      if (btn && nav) {
-        btn.addEventListener('click', function(){
-          const expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', String(!expanded));
-          nav.classList.toggle('show');
-        });
-        Array.from(nav.querySelectorAll('a')).forEach(a=> a.addEventListener('click', ()=>{
-          nav.classList.remove('show');
-          btn.setAttribute('aria-expanded','false');
-        }));
-      }
-      // Year
-      const yearEl = document.getElementById('year');
-      if (yearEl) yearEl.textContent = new Date().getFullYear();
+  const formData = new FormData(form);
 
-      // Simple client-side form handling (demo)
-      const form = document.getElementById('contactForm');
-      const response = document.getElementById('responseMessage');
-      if (form && response) {
-        form.addEventListener('submit', function(e){
-          e.preventDefault();
-          // Basic validation (HTML5 already handles required)
-          response.className = 'message success';
-          response.textContent = 'Merci — votre message a bien été envoyé. Nous vous recontacterons sous 48h.';
-          form.reset();
-          setTimeout(()=> response.style.display = 'none', 6000);
-        });
-      }
-    })();
-    </script>
+  const responseForm = await fetch(form.action, {
+    method: 'POST',
+    body: formData,
+    headers: { 'Accept': 'application/json' }
+  });
+
+  if (responseForm.ok) {
+    response.className = 'message success';
+    response.textContent = 'Merci — votre message a bien été envoyé.';
+    form.reset();
+  } else {
+    response.className = 'message error';
+    response.textContent = 'Une erreur est survenue. Veuillez réessayer.';
+  }
+});
+</script>
   </body>
 </html>
