@@ -236,7 +236,7 @@
           <a class="btn" href="FORM.html" target="_blank" aria-label="Formulaire de contact">Accéder au formulaire de contact</a>
         </p>
 
-        <div class="map-wrapper
+        <div class="map-wrapper">
           <h3>Où me trouver</h3>
           <div class="map-container" aria-hidden="false">
             <!-- Embed Google Maps centered on Montfermy (63) -->
@@ -284,19 +284,26 @@
           <img src="images/logo-sap.jpg" alt="logo de l'aggrément de service à la personne" class="logo-service-AP">
       </footer>
 
-  
+    
   <script>
-    // Menu toggle and small helpers
     (function(){
+      // Menu toggle and small helpers
       const btn = document.getElementById('nav-toggle');
       const nav = document.getElementById('navbar');
       if (btn && nav) {
+        // ensure initial aria state is consistent
+        if (!btn.hasAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+        if (!nav.hasAttribute('aria-hidden')) nav.setAttribute('aria-hidden', 'true');
+
         btn.addEventListener('click', function(){
           const expanded = this.getAttribute('aria-expanded') === 'true';
-          this.setAttribute('aria-expanded', String(!expanded));
-          nav.classList.toggle('show');
+          const newExpanded = !expanded;
+          this.setAttribute('aria-expanded', String(newExpanded));
+          nav.classList.toggle('show', newExpanded);
+          nav.setAttribute('aria-hidden', String(!newExpanded));
         });
       }
+
       // Fill current year in footer
       const yearEl = document.getElementById('year');
       if (yearEl) yearEl.textContent = new Date().getFullYear();
