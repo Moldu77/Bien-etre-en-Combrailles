@@ -273,6 +273,9 @@ section {
 .presentation-text {
   /* occupies remaining space on the left */
   padding: 7%;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
   
 }
 
