@@ -92,26 +92,42 @@
       </div>
     </footer>
 <script>
-   form.addEventListener('submit', async function(e){
-  e.preventDefault();
+  (function(){
+    const form = document.getElementById('contactForm');
+    const response = document.getElementById('responseMessage');
 
-  const formData = new FormData(form);
+    // Fill current year in footer
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  const responseForm = await fetch(form.action, {
-    method: 'POST',
-    body: formData,
-    headers: { 'Accept': 'application/json' }
-  });
+    if (form) {
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-  if (responseForm.ok) {
-    response.className = 'message success';
-    response.textContent = 'Merci — votre message a bien été envoyé.';
-    form.reset();
-  } else {
-    response.className = 'message error';
-    response.textContent = 'Une erreur est survenue. Veuillez réessayer.';
-  }
-});
+        const formData = new FormData(form);
+
+        try {
+          const responseForm = await fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (responseForm.ok) {
+            response.className = 'message success';
+            response.textContent = 'Merci — votre message a bien été envoyé.';
+            form.reset();
+          } else {
+            response.className = 'message error';
+            response.textContent = 'Une erreur est survenue. Veuillez réessayer.';
+          }
+        } catch (err) {
+          response.className = 'message error';
+          response.textContent = 'Erreur réseau. Vérifiez votre connexion et réessayez.';
+        }
+      });
+    }
+  })();
 </script>
   </body>
 </html>
