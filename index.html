@@ -50,7 +50,11 @@
         >
           <span class="hamburger"></span>
         </button>
-        <nav id="navbar" class="nav-links" role="navigation" aria-hidden="true"></nav>
+        <nav id="navbar" class="nav-links" role="navigation">
+          <a href="#acceuil">ACCUEIL</a>
+          <a href="#prestation">PRESTATIONS</a>
+          <a href="FORM.html">DEVIS</a>
+        </nav>
       </div>
     </header>
 
@@ -319,6 +323,13 @@
           nav.classList.toggle('show', newExpanded);
           nav.setAttribute('aria-hidden', String(!newExpanded));
         });
+
+        // Close menu when clicking a nav link (mobile)
+        Array.from(nav.querySelectorAll('a')).forEach(a => a.addEventListener('click', () => {
+          nav.classList.remove('show');
+          btn.setAttribute('aria-expanded', 'false');
+          nav.setAttribute('aria-hidden', 'true');
+        }));
       }
 
       // Fill current year in footer
