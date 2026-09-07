@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://bien-etre-en-combrailles.netlify.app/sitemap.xml
+Sitemap: https://bienetreencombrailles.fr/sitemap.xml
